@@ -1,6 +1,6 @@
 # user_csv.py
 # ENDG 233 F24
-# STUDENT NAME(S)
+# Matthew Guillaume, Vyapak Bansal
 # GROUP NAME
 # A terminal-based data analysis and visualization program in Python.
 # You must follow the specifications provided in the project description.
@@ -24,3 +24,15 @@ def write_csv(filename, data, overwrite):
     filename(str): name of the file you want to write the CSV into
     data(list): the 2D list to write into the CSV
     overwrite(bool): whether to overwrite the existing data or appending the new data"""
+
+    
+
+    if overwrite:
+        f = open(filename, "w")
+    else:
+        f = open(filename, "a")
+
+    for row in data:   
+        f.write(','.join(str(value) for value in row))
+        f.write('\n')
+
