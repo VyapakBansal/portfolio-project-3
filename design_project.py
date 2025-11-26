@@ -6,7 +6,7 @@
 # You must follow the specifications provided in the project description.
 # Remember to include docstrings and comments throughout your code.
 
-def get_ave_population(region, subregion = False, year = '2020', country_data, population_data):
+def get_ave_population(region, country_data, population_data, subregion = False, year = '2020'):
     """Finds the the average population of a region, with an optional subregion
     Parameters:
     region(str): A valid region 
@@ -16,6 +16,28 @@ def get_ave_population(region, subregion = False, year = '2020', country_data, p
     population_data(array): A numpy array containing information on endagered species 
     Returns:
     ave_population(flt): the average population in a region"""
+
+    countrys = []
+    if not subregion:
+        for row in country_data:
+            if row[1] == region:
+                countrys.append(row[0])
+        
+    else:
+        for row in country_data:
+            if row[2] == subregion:
+                countrys.append(row[0])
+
+    country_count = len(countrys)
+    year_index = 2021 - int(year)
+    total_population = 0
+    for row in population_data:
+        if row[0] in countrys:
+            total_population += row[year_index]
+    
+    ave_population = total_population / countrys
+    return(ave_population)
+
 
 def get_max_endagered_species(region, subregion = False):
     """Finds the country with the highest endagered species of a region, with an optional subregion
