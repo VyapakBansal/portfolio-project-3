@@ -26,12 +26,12 @@ def write_csv(filename, data, overwrite):
     overwrite(bool): whether to overwrite the existing data or appending the new data"""
 
     
-
+    # Check to see if we are writing or appending
     if overwrite:
         f = open(filename, "w")
     else:
         f = open(filename, "a")
-
+    # Write each row into a csv
     for row in data:   
         f.write(','.join(str(value) for value in row))
         f.write('\n')
