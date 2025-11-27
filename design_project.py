@@ -9,10 +9,12 @@ import user_csv
 import matplotlib as plt
 import numpy as np
 
-
+# Read the CSV files and save as numpy arrays
 COUNTRY_DATA = user_csv.read_csv("./data_files/Country_Data.csv", include_headers=False)
 SPECIES_DATA = user_csv.read_csv("./data_files/Threatened_Species.csv", include_headers=False)
 POPULATION_DATA = user_csv.read_csv("./data_files/Population_Data.csv", include_headers=False)
+
+
 def get_avg_population(region, subregion = False, year = 2020):
     """Finds the the average population of a region, with an optional subregion
     Parameters:
@@ -55,7 +57,8 @@ def get_max_endagered_species(region, subregion = ''):
     Returns:
         max_endagered_species(lst): a list containg the countries and it's number of endagered species""" 
     # @Matt, can you fix the docstring here to reflect this? I am not able to get the exact things to say.
-
+  
+    # Initiate empty variables
     total_species = 0
     max_species = 0
     countries = []
@@ -186,3 +189,28 @@ Things to add.
 2. Average Threatened Species Count by Region
 3. Most/Least Populated Country in Each Region ==> Done 
 """
+
+# Main Code
+
+# Find all regions
+regions = np.unique(COUNTRY_DATA[:,1])
+
+print('Welcome to our data analysis tool, which region would you like to evaluate?:')
+print(regions)
+region = input('>>')
+
+# Check for valid input
+if region in regions:
+    # Find all subregions in that region
+    subregions = []
+    for row in COUNTRY_DATA:
+        if row[1] == region:
+            subregions.append(row[2])
+    subregions = np.unique(subregions)
+
+    print('\nWhich subregion would you like to examin?:')
+    print(subregions)
+    subregion = input('>>')
+    # Check for valid input
+    if subregion in subregions:
+        print(f'What would you like to know about {subregion}?')
