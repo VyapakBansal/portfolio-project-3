@@ -13,7 +13,7 @@ import numpy as np
 COUNTRY_DATA = user_csv.read_csv("./data_files/Country_Data.csv", include_headers=False)
 SPECIES_DATA = user_csv.read_csv("./data_files/Threatened_Species.csv", include_headers=False)
 POPULATION_DATA = user_csv.read_csv("./data_files/Population_Data.csv", include_headers=False)
-def get_avg_population(region, subregion = False, year = '2020'):
+def get_avg_population(region, subregion = False, year = 2020):
     """Finds the the average population of a region, with an optional subregion
     Parameters:
     region(str): A valid region 
@@ -93,9 +93,53 @@ def get_population_density(country, year = 2020):
             area = country_profile[3]
     
     population_density = population/area
-    print(population_density)
     return population_density
-get_population_density(country="Albania", year=2018)
+
+def annual_population_growth(country, start_year = 2000, end_year = 2020):
+    """Calculates the population growth of a given country over a specified time range.
+    Parameters:
+        country (str): A valid country.
+        start_year (float): The starting year for comparison, defaults to 2000
+        end_year (float): The ending year for comparison, default to 2019
+    Returns:
+        growth_rate (float): The percentage change in population from start_year to end_year.
+    """
+    for pop_profile in POPULATION_DATA:
+        if country == pop_profile[0]:
+            growth = (pop_profile[2021-end_year] - pop_profile[2021-start_year])/((end_year-start_year)*pop_profile[2021-start_year])
+            growth_percent = round(growth*100, 2)
+    return growth_percent
+
+def most_least_population(region, subregion=''):
+    """
+    Calculates the minimum and maximum population values for a given region
+    (and optional subregion), and identifies the countries associated with them.
+    Parameters:
+        region (str): The region to search within (e.g., "Asia", "Europe").
+        subregion (str): An optional subregion filter. If empty, all
+                         subregions within the region are included.
+    Returns:
+        tuple: A tuple containing:
+            min_population (float), min_country (str): The smallest population and its country.
+            max_population (float), max_country (str): The largest population and its country.
+    """
+    countries = []
+    profiles = []
+    for region_profile in COUNTRY_DATA:
+        if region == region_profile[1]:
+            if subregion == region_profile[2]:
+                countries.append(region_profile[0])
+                continue
+            countries.append(region_profile[0])
+    for pop_profile in POPULATION_DATA:
+        if pop_profile[0] in countries:
+            profiles.append([pop_profile[0], pop_profile[1]])
+    profiles = np.array(profiles, dtype=object)
+    order = profiles[:, 1].argsort()
+    sorted_profiles = profiles[order]
+    maximum_populated_country = sorted_profiles[0]
+    minimum_populated_country = sorted_profiles[-1]
+    return maximum_populated_country, minimum_populated_country
 
 def plot_pop_and_endSpec(country):
     """Plots a feature with 2 subplots, one that shows a countrys population over time and one 
@@ -137,7 +181,8 @@ the data in the form of integers.
 """
 
 """
-1. Population Growth Rate (10-year % change)
+Things to add.
+1. Population Growth Rate ==> Done
 2. Average Threatened Species Count by Region
-3. Most/Least Populated Country in Each Region
+3. Most/Least Populated Country in Each Region ==> Done 
 """
