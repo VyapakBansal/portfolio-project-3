@@ -9,7 +9,11 @@ import user_csv
 import matplotlib as plt
 import numpy as np
 
-def get_ave_population(region, country_data, population_data, subregion = False, year = '2020'):
+
+COUNTRY_DATA = user_csv.read_csv("./data_files/Country_Data.csv", include_headers=False)
+SPECIES_DATA = user_csv.read_csv("./data_files/Threatened_Species.csv", include_headers=False)
+POPULATION_DATA = user_csv.read_csv("./data_files/Population_Data.csv", include_headers=False)
+def get_avg_population(region, subregion = False, year = '2020'):
     """Finds the the average population of a region, with an optional subregion
     Parameters:
     region(str): A valid region 
@@ -20,30 +24,30 @@ def get_ave_population(region, country_data, population_data, subregion = False,
     Returns:
     ave_population(flt): the average population in a region"""
     # Initiate an empty list
-    countrys = []
-    # Either make a list of all countrys in a region or subregion
+    countries = []
+    # Either make a list of all countries in a region or subregion
     if not subregion:
-        for row in country_data:
+        for row in COUNTRY_DATA:
             if row[1] == region:
-                countrys.append(row[0])
+                countries.append(row[0])
     else:
-        for row in country_data:
+        for row in COUNTRY_DATA:
             if row[2] == subregion:
-                countrys.append(row[0])
+                countries.append(row[0])
     # Turn the year input into a useable index
     year_index = 2021 - int(year)
     # Count the total population
     total_population = 0
-    for row in population_data:
-        if row[0] in countrys:
+    for row in POPULATION_DATA:
+        if row[0] in countries:
             total_population += row[year_index]
     
     # Return the average population
-    ave_population = total_population / len(countrys)
-    return(ave_population)
+    avg_population = total_population / len(countries)
+    return avg_population
 
 
-def get_max_endagered_species(region = False, subregion = False):
+def get_max_endagered_species(region, subregion = ''):
     """Finds the country with the highest endagered species of a region, with an optional subregion
     Parameters:
         region(str): A valid region 
@@ -55,24 +59,45 @@ def get_max_endagered_species(region = False, subregion = False):
     total_species = 0
     max_species = 0
     countries = []
-    data = user_csv.read_csv("./data_files/Threatened_Species.csv", include_headers=False)
-    for country_profile in data:
-        total_species = sum(country_profile[1:])
-        if total_species >= max_species:
-            max_species = total_species
-            countries.append(country_profile[0])
-    return f"The maximum endangered species: {max_species}.\nThe countries are {", ".join([country for country in countries])}"
-    
+    max_countries = []
+    for region_profile in COUNTRY_DATA:
+        if region == region_profile[1]:
+            if subregion == region_profile[2]:
+                countries.append(region_profile[0])
+                continue
+            countries.append(region_profile[0])
+    for country_profile in SPECIES_DATA:
+        if country_profile[0] in countries:
+            total_species = sum(country_profile[1:])
+            if total_species >= max_species:
+                max_species = total_species
+                max_countries.append(country_profile[0])
+    # return f"The maximum endangered species: {max_species}.\nThe countries are {", ".join([country for country in countries])}"
+    return max_countries, max_species
 
-def get_population_density(country, year = '2020'):
+
+def get_population_density(country, year = 2020):
     """Finds the population density in a given country and year 
     Parameters:
         country(str): A valid country 
-        year(str): The year that to take the population data from, defaults to 2020
+        year(float): The year that to take the population data from, defaults to 2020
     Returns:
         population_density(flt): the ratio of population per square kilometer"""
+    population = 0
+    area = 0
+    for pop_profile in POPULATION_DATA:
+        if country == pop_profile[0]:
+            population = pop_profile[2021-year]
+    for country_profile in COUNTRY_DATA:
+        if country == country_profile[0]:
+            area = country_profile[3]
+    
+    population_density = population/area
+    print(population_density)
+    return population_density
+get_population_density(country="Albania", year=2018)
 
-def plot_pop_and_endSpec(country, population_data, threatened_species):
+def plot_pop_and_endSpec(country):
     """Plots a feature with 2 subplots, one that shows a countrys population over time and one 
     breaks down the number of endagered species in that country
     Parameters:
@@ -82,7 +107,7 @@ def plot_pop_and_endSpec(country, population_data, threatened_species):
     Returns: 
     2 graphs on the same figure showing population and endagered species"""
     x = np.linspace(2000,2020,21)
-    for row in population_data:
+    for row in POPULATION_DATA:
         if row[0] == country:
             y1 = row[21:0,-1]
 
@@ -93,7 +118,7 @@ def plot_pop_and_endSpec(country, population_data, threatened_species):
     plt.xlable('Year')
     plt.ylable('Population')
 
-    for row in threatened_species:
+    for row in SPECIES_DATA:
         if row[0] == country:
             y2 = row[1:5]
 
@@ -102,3 +127,17 @@ def plot_pop_and_endSpec(country, population_data, threatened_species):
     plt.title(f"Number of Endagered Animals is {country}")
     plt.xlable('Species Class')
     plt.ylable('Number of Species')
+
+
+
+"""
+For note, we need to add .lower and .upper for all the case scenaraios in the 
+main function when we will be returning our values, and we need to present all
+the data in the form of integers.
+"""
+
+"""
+1. Population Growth Rate (10-year % change)
+2. Average Threatened Species Count by Region
+3. Most/Least Populated Country in Each Region
+"""
