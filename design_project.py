@@ -319,6 +319,12 @@ def plot_min_max_population_graph(region, subregion=''):
     plt.tight_layout()
     plt.show()
 
+def new_csv(): # Changes ( The new file shall have the sum of all animals, we don't need regions and subregions, the title should be current population instead of 2020 population, and we don't need are,a but population density of that country)
+    new_csv = np.concatenate(COUNTRY_DATA, SPECIES_DATA[1:], POPULATION_DATA[1], axis = 1)
+    headers = np.array(['Country','UN Region', 'UN Sub-Region', "Sq Km",  'Threatened Mammals', 'Threatened Birds', 'Threatened Fish', 'Threatened Plants', '2020 Population'])
+    new_csv = np.insert(new_csv, 0, headers, axis=0)
+    user_csv.write_csv('Compined_Data.csv', new_csv, True)
+
 
 def get_sub_regions(region):
     subregions = []
