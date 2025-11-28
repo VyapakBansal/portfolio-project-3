@@ -189,15 +189,40 @@ Things to add.
 2. Average Threatened Species Count by Region
 3. Most/Least Populated Country in Each Region ==> Done 
 """
-
-# Main Code
-
 # Find all regions
 regions = np.unique(COUNTRY_DATA[:,1])
 
-print('Welcome to our data analysis tool, which region would you like to evaluate?:')
-print(regions)
-region = input('>>')
+def get_region():
+    region = input('What region would you like to access?: ').capitalize()
+    if region in regions:
+        return(region)
+    else:
+        print ('Input not recognized')
+# Main Code
+
+
+
+
+print('Welcome to our data analysis tool, what data would you like to access?:')
+print('1) Average Population\n2) Highest Threatened Species\n3) Population Density\n4)Population Growth\n5) Maximum and Minimum Populations\n6) Graphs\n0) End Program')
+menu_option = input('>>')
+
+if menu_option == '1':
+
+elif menu_option == '2':
+
+elif menu_option == '3':
+
+elif menu_option == '4':
+
+elif menu_option == '5':
+
+elif menu_option == '6':
+
+elif menu_option == '0':
+
+else:
+    print('Input not recognized. Try Again')
 
 # Check for valid input
 if region in regions:
