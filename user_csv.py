@@ -24,7 +24,7 @@ def read_csv(file_name, include_headers = True):
                     continue
             row = line.strip().split(",")
             for index, element in enumerate(row):
-                if element.isnumeric():
+                if element.replace('-', '', 1).replace('.', '', 1).isdigit():
                     row[index] = float(element)                  
             rows.append(row)
         array = np.array(rows , dtype=object)
@@ -32,21 +32,32 @@ def read_csv(file_name, include_headers = True):
 
 def write_csv(filename, data, overwrite):
     """
-    Takes a 2D list and writes it in to a CSV file
+    Takes a 2D list and writes it into a CSV file
     Parameters:
         filename(str): name of the file you want to write the CSV into
         data(list): the 2D list to write into the CSV
-        overwrite(bool): whether to overwrite the existing data or appending the new data
+        overwrite(bool): whether to overwrite the existing data or append the new data
     """
 
-    
     # Check to see if we are writing or appending
     if overwrite:
-        f = open(filename, "w")
+        mode = "w"
     else:
-        f = open(filename, "a")
-    # Write each row into a csv
-    for row in data:   
-        f.write(','.join(str(value) for value in row))
-        f.write('\n')
-        
+        mode = "a"
+
+    # Use context manager to ensure file is properly closed
+    with open(filename, mode, newline='') as f:
+        # Write each row into a csv
+        for row in data:   
+            # Convert each value to string and join with commas
+            # Handle values that might contain commas by wrapping in quotes
+            escaped_row = []
+            for value in row:
+                str_value = str(value)
+                # If value contains comma, quote, or newline, wrap in quotes and escape quotes
+                if ',' in str_value or '"' in str_value or '\n' in str_value:
+                    str_value = '"' + str_value.replace('"', '""') + '"'
+                escaped_row.append(str_value)
+            
+            f.write(','.join(escaped_row))
+            f.write('\n')
