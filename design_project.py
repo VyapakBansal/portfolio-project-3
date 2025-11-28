@@ -175,7 +175,11 @@ def plot_pop_and_endSpec(country):
     plt.xlable('Species Class')
     plt.ylable('Number of Species')
 
-
+def new_csv():
+    new_csv = np.concatenate(COUNTRY_DATA, SPECIES_DATA[1:], POPULATION_DATA[1], axis = 1)
+    headers = np.array(['Country','UN Region', 'UN Sub-Region', "Sq Km",  'Threatened Mammals', 'Threatened Birds', 'Threatened Fish', 'Threatened Plants', '2020 Population'])
+    new_csv = np.insert(new_csv, 0, headers, axis=0)
+    user_csv.write_csv('Compined_Data.csv', new_csv, True)
 
 """
 For note, we need to add .lower and .upper for all the case scenaraios in the 
