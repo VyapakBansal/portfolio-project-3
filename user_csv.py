@@ -48,7 +48,7 @@ def write_csv(filename, data, overwrite):
     # Use context manager to ensure file is properly closed
     with open(filename, mode, newline='') as f:
         # Write each row into a csv
-        for row in data:   
+        for row in data:
             # Convert each value to string and join with commas
             # Handle values that might contain commas by wrapping in quotes
             escaped_row = []

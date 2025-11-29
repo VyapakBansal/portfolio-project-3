@@ -333,24 +333,26 @@ def new_csv():
     """Creates a new combined CSV file with selected data from all three datasets"""
     # Combine data from all three arrays
     new_data = []
-    
-    for country_row in COUNTRY_DATA:
-        country_name = country_row[0]
-        
+    headers = ['Country', 'UN Region', 'UN Sub-Region', 'Total Threatened Species', 
+               'Current Population', 'Population Density']
+    new_data.append(headers)
+    for country_profile in COUNTRY_DATA:
+        country_name = country_profile[0]
+
         # Find matching species data
         species_row = None
-        for s_row in SPECIES_DATA:
-            if s_row[0] == country_name:
-                species_row = s_row
+        for species_profile in SPECIES_DATA:
+            if species_profile[0] == country_name:
+                species_row = species_profile
                 break
-        
+
         # Find matching population data
         pop_row = None
         for p_row in POPULATION_DATA:
             if p_row[0] == country_name:
                 pop_row = p_row
                 break
-        
+
         # If we have all the data, create the combined row
         if species_row is not None and pop_row is not None:
             # Calculate total threatened species
@@ -358,28 +360,28 @@ def new_csv():
             # Get 2020 population
             pop_2020 = pop_row[1]
             # Calculate population density
-            area = country_row[3]
-            pop_density = pop_2020 / area if area > 0 else 0
-            
+            area = country_profile[3]
+            if area == '':
+                continue
+            pop_density = pop_2020 / area
+
             # Create new row
             new_row = [
                 country_name,
-                country_row[1],  # UN Region
-                country_row[2],  # UN Sub-Region
+                country_profile[1],  # UN Region
+                country_profile[2],  # UN Sub-Region
                 total_species,
                 pop_2020,
                 pop_density
             ]
             new_data.append(new_row)
-    
+
     # Create headers
-    headers = ['Country', 'UN Region', 'UN Sub-Region', 'Total Threatened Species', 
-               'Current Population', 'Population Density']
-    
+
+
     # Convert to numpy array and add headers
     new_csv_array = np.array(new_data, dtype=object)
-    new_csv_array = np.insert(new_csv_array, 0, headers, axis=0)
-    
+
     # Write to CSV
     user_csv.write_csv('Combined_Data.csv', new_csv_array, True)
     print("Combined CSV file created successfully!")
@@ -408,7 +410,7 @@ def get_user_region(regions):
     while True:
         print('\nAvailable regions:', ', '.join(regions))
         region = input('Please enter the region: ').strip().title()
-        
+
         if region in regions:
             return region
         else:
@@ -597,7 +599,7 @@ def main():
         else:
             print('\nInput not recognized. Please try again.')
 
-
+new_csv()
 # Run the program
 if __name__ == "__main__":
     main()
