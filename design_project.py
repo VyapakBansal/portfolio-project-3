@@ -386,6 +386,38 @@ def new_csv():
     user_csv.write_csv('Combined_Data.csv', new_csv_array, True)
     print("Combined CSV file created successfully!")
 
+def main_graph():
+    """Makes a grph of total population over time and total counts for threatened species in different classes"""
+    # Make a vector of all the total population in each year
+    populations_slice = POPULATION_DATA[:, 1:]
+    populations = np.sum(populations_slice, axis=0)
+    x = np.arange(2020,1999,-1)
+    # Make a vector of total species
+    species = np.sum(SPECIES_DATA[:,1:], axis=0)
+    x2 = ['Mammals','Birds','Fish','Plants']
+
+    # Plot the population
+    plt.subplot(1,2,1)
+    plt.plot(x,populations)
+    plt.title('Total Population Over Time')
+    plt.xlabel('Year', fontsize=12)
+    plt.ylabel('Population', fontsize=12)
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+
+    # Plot the threatened species
+    plt.subplot(1,2,2)
+    plt.bar(x2,species, color=['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'])
+    plt.title('Total Threatened Species')
+    plt.xlabel('Species Class', fontsize = 12)
+    plt.ylabel('Number of Species', fontsize = 12)
+    plt.grid(True, alpha=0.3, axis='y')
+    plt.tight_layout()
+   
+    # Save and print the graph
+    plt.savefig("final_plots/maingraph.png")
+    plt.show()
+
 
 def get_sub_regions(region):
     """Gets all unique subregions within a region
@@ -393,7 +425,9 @@ def get_sub_regions(region):
         region(str): A valid region name
     Returns:
         subregions(numpy.ndarray): Array of unique subregion names"""
+    # Initiate empty list
     subregions = []
+    # Find unique subregions
     for country_profile in COUNTRY_DATA:
         if country_profile[1] == region:
             subregions.append(country_profile[2])
@@ -407,10 +441,13 @@ def get_user_region(regions):
         regions(numpy.ndarray): Array of valid region names
     Returns:
         region(str): A valid region selected by the user"""
+    
+    # Print all the available regions and get input
     while True:
         print('\nAvailable regions:', ', '.join(regions))
         region = input('Please enter the region: ').strip().title()
 
+        # Check if valid region
         if region in regions:
             return region
         else:
@@ -423,8 +460,10 @@ def get_user_subregions(subregions):
         subregions(numpy.ndarray): Array of valid subregion names
     Returns:
         subregion(str): A valid subregion selected by the user"""
+    # Gets subregion input
     while True:
         subregion = input('Please enter the subregion: ').strip().title()
+        # Verify it is valid
         if subregion in subregions:
             return subregion
         else:
@@ -437,6 +476,8 @@ def get_user_country(all_countries):
         all_countries(numpy.ndarray): Array of all valid country names
     Returns:
         country(str): A valid country selected by the user"""
+    
+    # Get input for country selection and verify its valid
     while True:
         print('\nAvailable countries:', ', '.join(all_countries[:10]), '... (and more)')
         country = input('Please enter the country name: ').strip().title()
@@ -602,4 +643,5 @@ def main():
 new_csv()
 # Run the program
 if __name__ == "__main__":
+    main_graph()
     main()
