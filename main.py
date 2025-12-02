@@ -84,21 +84,21 @@ def main(country_data, population_data, species_data):
             if use_subregion == 'yes':
                 # Keep asking until we get a valid subregion
                 subregion = get_user_subregions(subregions)
-                max_countries, max_species = get_max_endagered_species(region, country_data, species_data, subregion)
+                max_countries, max_species = get_max_endangered_species(region, country_data, species_data, subregion)
                 print(f'\nMaximum endangered species count: {max_species}')
                 print(f'Country(ies) with highest count: {", ".join(max_countries)}')
                 
                 show_graph = input('\nWould you like to see a graph? (yes/no): ').strip().lower()
                 if show_graph == 'yes':
-                    plot_endangered_species_graph(region, species_data, subregion)
+                    plot_endangered_species_graph(region, country_data, species_data, subregion)
             else:
-                max_countries, max_species = get_max_endagered_species(region, country_data, species_data)
+                max_countries, max_species = get_max_endangered_species(region, country_data, species_data)
                 print(f'\nMaximum endangered species count: {max_species}')
                 print(f'Country(ies) with highest count: {", ".join(max_countries)}')
                 
                 show_graph = input('\nWould you like to see a graph? (yes/no): ').strip().lower()
                 if show_graph == 'yes':
-                    plot_endangered_species_graph(region, species_data)
+                    plot_endangered_species_graph(region, country_data, species_data)
         
         # Population density option
         elif menu_option == '3':
@@ -140,11 +140,12 @@ def main(country_data, population_data, species_data):
             # See if they want to narrow it down to a subregion
             print(f'\nAvailable subregions in {region}:', ', '.join(subregions))
             use_subregion = input('Would you like to filter by subregion? (yes/no): ').strip().lower()
+            if most_least_population(region, country_data, population_data, subregion) == None:
+                print("No data found for the same.")
             
             if use_subregion == 'yes':
                 # Keep asking until we get a valid subregion
                 subregion = get_user_subregions(subregions)
-                
                 min_pop, max_pop = most_least_population(region, country_data, population_data, subregion)
                 print(f'\nMinimum population: {min_pop[0]} with {float(min_pop[1]):,.0f} people')
                 print(f'Maximum population: {max_pop[0]} with {float(max_pop[1]):,.0f} people')
@@ -153,7 +154,7 @@ def main(country_data, population_data, species_data):
                 if show_graph == 'yes':
                     plot_min_max_population_graph(region, subregion)
             else:
-                min_pop, max_pop = most_least_population(region, country_data, population_data, '')
+                min_pop, max_pop = most_least_population(region, country_data, population_data)
                 print(f'\nMinimum population: {min_pop[0]} with {float(min_pop[1]):,.0f} people')
                 print(f'Maximum population: {max_pop[0]} with {float(max_pop[1]):,.0f} people')
                 
@@ -170,8 +171,9 @@ def main(country_data, population_data, species_data):
         else:
             print('\nInput not recognized. Please try again.')
 
-new_csv(COUNTRY_DATA, SPECIES_DATA, POPULATION_DATA)
+
 # Run the program
 if __name__ == "__main__":
-    main_graph(POPULATION_DATA, SPECIES_DATA)
     main(COUNTRY_DATA, POPULATION_DATA, SPECIES_DATA)
+    new_csv(COUNTRY_DATA, SPECIES_DATA, POPULATION_DATA)
+    main_graph(POPULATION_DATA, SPECIES_DATA)

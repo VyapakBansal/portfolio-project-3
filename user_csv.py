@@ -18,14 +18,14 @@ def read_csv(file_name, include_headers = True):
     data_list(lst): A 2D list of the CSV file, with or without headers"""
     rows = []
     with open(file_name, "r") as file:
-        for index, line in enumerate(file):
+        for index1, line in enumerate(file):
             if not include_headers:
-                if index == 0:
+                if index1 == 0:
                     continue
             row = line.strip().split(",")
-            for index, element in enumerate(row):
+            for index2, element in enumerate(row):
                 if element.replace('-', '', 1).replace('.', '', 1).isdigit():
-                    row[index] = float(element)                  
+                    row[index2] = float(element)                  
             rows.append(row)
         array = np.array(rows , dtype=object)
     return array

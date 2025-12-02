@@ -15,11 +15,11 @@ def get_avg_population(region, country_data, population_data, subregion=False, y
     # Initiate an empty list
     countries = []
     # Either make a list of all countries in a region or subregion
-    if not subregion:
+    if not subregion: # If subregion is provided
         for row in country_data:
             if row[1] == region:
                 countries.append(row[0])
-    else:
+    else: # Incase its not
         for row in country_data:
             if row[2] == subregion:
                 countries.append(row[0])
@@ -35,14 +35,12 @@ def get_avg_population(region, country_data, population_data, subregion=False, y
     for row in population_data:
         if row[0] in countries:
             list_population.append(row[year_index])
-    
+    list_population = np.array(list_population, dtype = float)
     # Return the average population
-    print(list_population)
-    list_population = np.array(list_population, dtype = object)
     avg_population = list_population.mean()
     return avg_population
 
-def get_max_endagered_species(region, country_data, species_data, subregion=''):
+def get_max_endangered_species(region, country_data, species_data, subregion=''):
     """Finds the country with the highest endangered species in a region, with an optional subregion
     Parameters:
         region(str): A valid region 
@@ -67,7 +65,6 @@ def get_max_endagered_species(region, country_data, species_data, subregion=''):
     for country_profile in species_data:
         if country_profile[0] in countries:
             total_species = sum(country_profile[1:])
-            
             if total_species > max_species:
                 max_species = total_species
                 max_countries = [country_profile[0]]
@@ -103,7 +100,7 @@ def get_population_density(country, population_data, country_data, year=2020):
             break
     
     # Avoid dividing by zero if area is missing
-    if area == 0:
+    if area == 0 or area == '' or area == None:
         return 0
     
     population_density = population/area
@@ -125,17 +122,16 @@ def annual_population_growth(country, population_data, start_year=2000, end_year
     
     # Find the growth percent
     for pop_profile in population_data:
-        if country == pop_profile[0]:
+        if country == pop_profile[0]: # If country matches
             start_pop = pop_profile[2021-start_year]
             end_pop = pop_profile[2021-end_year]
             years_diff = end_year - start_year
             
-            if start_pop > 0 and years_diff > 0:
+            if start_pop > 0 and years_diff > 0: # if both values are valid
                 growth = (end_pop - start_pop) / (years_diff * start_pop)
                 growth_percent = round(growth * 100, 2)
-            break
-    
-    return growth_percent
+                return growth_percent
+            return 0
 
 
 def most_least_population(region, country_data, population_data, subregion=''):
@@ -170,7 +166,8 @@ def most_least_population(region, country_data, population_data, subregion=''):
     # Sort by population to find min and max
     profiles = np.array(profiles, dtype=object)
     populations = profiles[:, 1].astype(float)
-
+    if len(profiles) == 0: 
+        return None
     min_idx = np.argmin(populations)
     max_idx = np.argmax(populations)
     
@@ -212,7 +209,7 @@ def plot_avg_population_graph(region, country_data, population_data, subregion=F
     plt.show()
 
 
-def plot_endangered_species_graph(region, species_data, subregion=''):
+def plot_endangered_species_graph(region, country_data, species_data, subregion=''):
     """
     Plots a bar chart of endangered species by category for countries with max species
     Parameters:
@@ -221,7 +218,7 @@ def plot_endangered_species_graph(region, species_data, subregion=''):
         subregion(str): An optional subregion specification
     """
     
-    max_countries, max_species = get_max_endagered_species(region, subregion)
+    max_countries, max_species = get_max_endangered_species(region, country_data, species_data, subregion )
     
     # Just use the first country if there's multiple with the same count
     country = max_countries[0]
@@ -308,7 +305,7 @@ def plot_population_growth_graph(country, population_data, start_year=2000, end_
     plt.show()
 
 
-def plot_min_max_population_graph(region, subregion=''):
+def plot_min_max_population_graph(region, country_data, population_data, subregion=''):
     """
     Plots a bar chart comparing minimum and maximum population countries
     Parameters:
@@ -316,7 +313,7 @@ def plot_min_max_population_graph(region, subregion=''):
         subregion(str): An optional subregion specification
     """
     
-    min_pop, max_pop = most_least_population(region, subregion)
+    min_pop, max_pop = most_least_population(region, country_data, population_data, subregion)
     
     countries = [min_pop[0], max_pop[0]]
     populations = [float(min_pop[1]), float(max_pop[1])]
