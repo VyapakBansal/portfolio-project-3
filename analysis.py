@@ -6,6 +6,8 @@ def get_avg_population(region, country_data, population_data, subregion=False, y
     """Finds the average population of a region, with an optional subregion
     Parameters:
         region(str): A valid region 
+        country_data(ndarray): An array of country data
+        population_data(ndarray): An array of population data
         subregion(str): An optional specification for a valid sub-region 
         year(int): The year to take the population data from, defaults to 2020
     Returns:
@@ -44,6 +46,8 @@ def get_max_endagered_species(region, country_data, species_data, subregion=''):
     """Finds the country with the highest endangered species in a region, with an optional subregion
     Parameters:
         region(str): A valid region 
+        country_data(ndarray): An array of country data
+        species_data(ndarray): An array of threatened species data
         subregion(str): An optional specification for a valid sub-region 
     Returns:
         tuple: (max_countries(list), max_species(int)) - list of countries and their max species count""" 
@@ -77,6 +81,8 @@ def get_population_density(country, population_data, country_data, year=2020):
     """Finds the population density in a given country and year 
     Parameters:
         country(str): A valid country 
+        population_data(ndarray): An array of population data
+        country_data(ndarray): An array of country data
         year(int): The year to take the population data from, defaults to 2020
     Returns:
         population_density(float): the ratio of population per square kilometer"""
@@ -108,6 +114,7 @@ def annual_population_growth(country, population_data, start_year=2000, end_year
     """Calculates the annual population growth rate of a given country over a specified time range.
     Parameters:
         country(str): A valid country.
+        population_data(ndarray): An array of population data
         start_year(int): The starting year for comparison, defaults to 2000
         end_year(int): The ending year for comparison, defaults to 2020
     Returns:
@@ -137,6 +144,8 @@ def most_least_population(region, country_data, population_data, subregion=''):
     (and optional subregion), and identifies the countries associated with them.
     Parameters:
         region(str): The region to search within (e.g., "Asia", "Europe").
+        country_data(ndarray): An array of country data
+        population_data(ndarray): An array of population data
         subregion(str): An optional subregion filter. If empty, all
                         subregions within the region are included.
     Returns:
@@ -174,6 +183,8 @@ def plot_avg_population_graph(region, country_data, population_data, subregion=F
     Plots the average population of a region/subregion over the years 2000-2020
     Parameters:
         region(str): A valid region
+        country_data(ndarray): An array of country data
+        population_data(ndarray): An array of population data
         subregion(str or bool): An optional subregion specification
     """
     
@@ -206,6 +217,7 @@ def plot_endangered_species_graph(region, species_data, subregion=''):
     Plots a bar chart of endangered species by category for countries with max species
     Parameters:
         region(str): A valid region
+        species_data(ndarray): An array of threatened species data
         subregion(str): An optional subregion specification
     """
     
@@ -269,6 +281,7 @@ def plot_population_growth_graph(country, population_data, start_year=2000, end_
     Plots the actual population values over time for a country
     Parameters:
         country(str): A valid country name
+        population_data(ndarray): An array of population data
         start_year(int): Starting year for the plot
         end_year(int): Ending year for the plot
     """
@@ -325,7 +338,12 @@ def plot_min_max_population_graph(region, subregion=''):
 
 
 def new_csv(country_data, species_data, population_data):
-    """Creates a new combined CSV file with selected data from all three datasets"""
+    """Creates a new combined CSV file with selected data from all three datasets
+    
+    Parameters:
+        country_data(ndarray): An array of country data
+        species_data(ndarray): An array of threatened species data
+        population_data(ndarray): An array of population data"""
     # Combine data from all three arrays
     new_data = []
     headers = ['Country', 'UN Region', 'UN Sub-Region', 'Total Threatened Species', 
@@ -378,7 +396,10 @@ def new_csv(country_data, species_data, population_data):
     print("Combined CSV file created successfully!")
 
 def main_graph(population_data, species_data):
-    """Makes a grph of total population over time and total counts for threatened species in different classes"""
+    """Makes a grph of total population over time and total counts for threatened species in different classes
+    Parameters:
+        population_data(ndarray): An array of population data
+        species_data(ndarray): An array of threatened species data"""
     # Make a vector of all the total population in each year
     populations_slice = population_data[:, 1:]
     populations = np.sum(populations_slice, axis=0)

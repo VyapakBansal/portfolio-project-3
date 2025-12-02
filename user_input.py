@@ -5,6 +5,8 @@ def get_sub_regions(region, country_data):
     """Gets all unique subregions within a region
     Parameters:
         region(str): A valid region name
+        country_data(ndarray): An array of country data
+        
     Returns:
         subregions(numpy.ndarray): Array of unique subregion names"""
     # Initiate empty list

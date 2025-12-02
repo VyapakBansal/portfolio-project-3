@@ -16,7 +16,11 @@ POPULATION_DATA = user_csv.read_csv("./data_files/Population_Data.csv", include_
 
 # Main function
 def main(country_data, population_data, species_data):
-    """Main function that provides a menu-driven interface for data analysis"""
+    """Main function that provides a menu-driven interface for data analysis
+    Parameters:
+        country_data(ndarray): An array of country data
+        population_data(ndarray): An array of population data
+        species_data(ndarray): An array of threatened species data"""
     
     # Get all unique regions from the data
     regions = np.unique(country_data[:, 1])
