@@ -29,17 +29,16 @@ def get_avg_population(region, country_data, population_data, subregion=False, y
     # Turn the year input into a useable index
     year_index = 2021 - int(year)
     # Count the total population
-    total_population = 0
+    list_population = []
     for row in population_data:
         if row[0] in countries:
-            total_population += row[year_index]
-
+            list_population.append(row[year_index])
     
     # Return the average population
-    total_population = np.array(total_population, dtype = object)
-    avg_population = total_population.mean()
+    print(list_population)
+    list_population = np.array(list_population, dtype = object)
+    avg_population = list_population.mean()
     return avg_population
-
 
 def get_max_endagered_species(region, country_data, species_data, subregion=''):
     """Finds the country with the highest endangered species in a region, with an optional subregion
@@ -239,7 +238,7 @@ def plot_endangered_species_graph(region, species_data, subregion=''):
     plt.show()
 
 
-def plot_population_density_graph(country):
+def plot_population_density_graph(country, population_data, country_data):
     """
     Plots the population density trend for a country over years 2000-2020
     Parameters:
@@ -251,7 +250,7 @@ def plot_population_density_graph(country):
     
     # Calculate density for each year
     for year in years:
-        density = get_population_density(country, year)
+        density = get_population_density(country, population_data, country_data, year)
         densities.append(density)
     
     plt.figure(figsize=(10, 6))
@@ -275,18 +274,18 @@ def plot_population_growth_graph(country, population_data, start_year=2000, end_
     """
     
     # Grab population data for the country
-    population_data = []
+    pop_data = []
     for pop_profile in population_data:
         if pop_profile[0] == country:
             start_index = 2021 - start_year
             end_index = 2021 - end_year
-            population_data = pop_profile[end_index:start_index+1][::-1]
+            pop_data = pop_profile[end_index:start_index+1][::-1]
             break
     
     years = np.arange(start_year, end_year + 1)
     
     plt.figure(figsize=(10, 6))
-    plt.plot(years, population_data, marker='o', linewidth=2, markersize=5, color='#27AE60')
+    plt.plot(years, pop_data, marker='o', linewidth=2, markersize=5, color='#27AE60')
     plt.title(f'Population Growth in {country} ({start_year}-{end_year})', fontsize=14, fontweight='bold')
     plt.xlabel('Year', fontsize=12)
     plt.ylabel('Population', fontsize=12)
@@ -357,7 +356,7 @@ def new_csv(country_data, species_data, population_data):
             pop_2020 = pop_row[1]
             # Calculate population density
             area = country_profile[3]
-            if area == '':
+            if area == '' or area == 0 or area == None:
                 continue
             pop_density = round(pop_2020/area, 2)
 

@@ -80,7 +80,7 @@ def main(country_data, population_data, species_data):
             if use_subregion == 'yes':
                 # Keep asking until we get a valid subregion
                 subregion = get_user_subregions(subregions)
-                max_countries, max_species = get_max_endagered_species(region, country_data, subregion)
+                max_countries, max_species = get_max_endagered_species(region, country_data, species_data, subregion)
                 print(f'\nMaximum endangered species count: {max_species}')
                 print(f'Country(ies) with highest count: {", ".join(max_countries)}')
                 
@@ -108,7 +108,7 @@ def main(country_data, population_data, species_data):
             
             show_graph = input('\nWould you like to see a graph? (yes/no): ').strip().lower()
             if show_graph == 'yes':
-                plot_population_density_graph(country)
+                plot_population_density_graph(country, population_data, country_data)
         
         # Population growth option
         elif menu_option == '4':
@@ -132,7 +132,7 @@ def main(country_data, population_data, species_data):
             region = get_user_region(regions)
             
             # Get all subregions in this region
-            subregions = get_sub_regions(region)
+            subregions = get_sub_regions(region, country_data)
             # See if they want to narrow it down to a subregion
             print(f'\nAvailable subregions in {region}:', ', '.join(subregions))
             use_subregion = input('Would you like to filter by subregion? (yes/no): ').strip().lower()
