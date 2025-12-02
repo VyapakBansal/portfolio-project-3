@@ -161,7 +161,6 @@ def most_least_population(region, country_data, population_data, subregion=''):
     
     # Sort by population to find min and max
     profiles = np.array(profiles, dtype=object)
-    profiles = np.array(profiles, dtype=object)
     populations = profiles[:, 1].astype(float)
 
     min_idx = np.argmin(populations)
@@ -360,7 +359,7 @@ def new_csv(country_data, species_data, population_data):
             area = country_profile[3]
             if area == '':
                 continue
-            pop_density = pop_2020 / area
+            pop_density = round(pop_2020/area, 2)
 
             # Create new row
             new_row = [
