@@ -640,8 +640,9 @@ def main():
         else:
             print('\nInput not recognized. Please try again.')
 
-new_csv()
+
 # Run the program
 if __name__ == "__main__":
     main_graph()
     main()
+    new_csv()
