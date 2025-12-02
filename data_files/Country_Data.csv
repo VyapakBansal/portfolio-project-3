@@ -4,25 +4,25 @@ Albania,Europe,Southern Europe,28800
 Algeria,Africa,Northern Africa,2380000
 Andorra,Europe,Southern Europe,470
 Angola,Africa,Sub-Saharan Africa,1250000
-Antigua and Barbuda,Americas,Latin America and the Caribbean,440
-Argentina,Americas,Latin America and the Caribbean,2780000
+Antigua and Barbuda,Americas,Latin America,440
+Argentina,Americas,Latin America,2780000
 Armenia,Asia,Western Asia,29700
 Australia,Oceania,Australia and New Zealand,7740000
 Austria,Europe,Western Europe,83900
 Azerbaijan,Asia,Western Asia,86600
-Bahamas,Americas,Latin America and the Caribbean,13900
+Bahamas,Americas,Latin America,13900
 Bahrain,Asia,Western Asia,778
 Bangladesh,Asia,Southern Asia,148000
-Barbados,Americas,Latin America and the Caribbean,430
+Barbados,Americas,Latin America,430
 Belarus,Europe,Eastern Europe,208000
 Belgium,Europe,Western Europe,30500
-Belize,Americas,Latin America and the Caribbean,23000
+Belize,Americas,Latin America,23000
 Benin,Africa,Sub-Saharan Africa,115000
 Bhutan,Asia,Southern Asia,38400
-Bolivia,Americas,Latin America and the Caribbean,1100000
+Bolivia,Americas,Latin America,1100000
 Bosnia and Herzegovina,Europe,Southern Europe,51200
 Botswana,Africa,Sub-Saharan Africa,582000
-Brazil,Americas,Latin America and the Caribbean,8520000
+Brazil,Americas,Latin America,8520000
 Brunei,Asia,South-eastern Asia,5770
 Bulgaria,Europe,Eastern Europe,111000
 Burkina Faso,Africa,Sub-Saharan Africa,274000
@@ -33,24 +33,24 @@ Canada,Americas,Northern America,9980000
 Cape Verde,Africa,Western Africa,4030
 Central African Republic,Africa,Sub-Saharan Africa,623000
 Chad,Africa,Sub-Saharan Africa,1280000
-Chile,Americas,Latin America and the Caribbean,757000
+Chile,Americas,Latin America,757000
 China,Asia,Eastern Asia,9560000
-Colombia,Americas,Latin America and the Caribbean,1140000
+Colombia,Americas,Latin America,1140000
 Comoros,Africa,Sub-Saharan Africa,1860
-Costa Rica,Americas,Latin America and the Caribbean,51100
+Costa Rica,Americas,Latin America,51100
 Cote d'Ivoire,Africa,Sub-Saharan Africa,322000
 Croatia,Europe,Southern Europe,56600
-Cuba,Americas,Latin America and the Caribbean,110000
+Cuba,Americas,Latin America,110000
 Cyprus,Asia,Western Asia,9250
 Czech Republic,Europe,Eastern Europe,78900
 Dem. Rep. of Congo,Africa,Sub-Saharan Africa,2340000
 Denmark,Europe,Northern Europe,42900
 Djibouti,Africa,Sub-Saharan Africa,23200
-Dominica,Americas,Latin America and the Caribbean,750
-Dominican Republic,Americas,Latin America and the Caribbean,48700
-Ecuador,Americas,Latin America and the Caribbean,256000
+Dominica,Americas,Latin America,750
+Dominican Republic,Americas,Latin America,48700
+Ecuador,Americas,Latin America,256000
 Egypt,Africa,Northern Africa,1000000
-El Salvador,Americas,Latin America and the Caribbean,21000
+El Salvador,Americas,Latin America,21000
 Equatorial Guinea,Africa,Sub-Saharan Africa,28100
 Eritrea,Africa,Sub-Saharan Africa,118000
 Estonia,Europe,Northern Europe,45300
@@ -67,12 +67,12 @@ Germany,Europe,Western Europe,358000
 Ghana,Africa,Sub-Saharan Africa,239000
 Greece,Europe,Southern Europe,132000
 Grenada,Americas,Northern America,340
-Guatemala,Americas,Latin America and the Caribbean,109000
+Guatemala,Americas,Latin America,109000
 Guinea,Africa,Sub-Saharan Africa,246000
 Guinea-Bissau,Africa,Sub-Saharan Africa,36100
-Guyana,Americas,Latin America and the Caribbean,215000
-Haiti,Americas,Latin America and the Caribbean,27800
-Honduras,Americas,Latin America and the Caribbean,112000
+Guyana,Americas,Latin America,215000
+Haiti,Americas,Latin America,27800
+Honduras,Americas,Latin America,112000
 Hungary,Europe,Eastern Europe,93000
 Iceland,Europe,Northern Europe,103000
 India,Asia,Southern Asia,3290000
@@ -82,7 +82,7 @@ Iraq,Asia,Western Asia,435000
 Ireland,Europe,Northern Europe,70300
 Israel,Asia,Western Asia,22100
 Italy,Europe,Southern Europe,301000
-Jamaica,Americas,Latin America and the Caribbean,11000
+Jamaica,Americas,Latin America,11000
 Japan,Asia,Eastern Asia,378000
 Jordan,Asia,Western Asia,89300
 Kazakhstan,Asia,Central Asia,2720000
@@ -108,7 +108,7 @@ Malta,Europe,Southern Europe,320
 Marshall Islands,Oceania,Micronesia,180
 Mauritania,Africa,Sub-Saharan Africa,1030000
 Mauritius,Africa,Sub-Saharan Africa,2040
-Mexico,Americas,Latin America and the Caribbean,1960000
+Mexico,Americas,Latin America,1960000
 Moldova,Europe,Eastern Europe,33900
 Monaco,Europe,Western Europe,
 Mongolia,Asia,Eastern Asia,1560000
@@ -121,7 +121,7 @@ Nauru,Oceania,Micronesia,20
 Nepal,Asia,Southern Asia,147000
 Netherlands,Europe,Western Europe,41500
 New Zealand,Oceania,Australia and New Zealand,268000
-Nicaragua,Americas,Latin America and the Caribbean,130000
+Nicaragua,Americas,Latin America,130000
 Niger,Africa,Sub-Saharan Africa,1270000
 Nigeria,Africa,Sub-Saharan Africa,924000
 North Korea,Asia,Eastern Asia,121000
@@ -131,10 +131,10 @@ Oman,Asia,Western Asia,310000
 Pakistan,Asia,Southern Asia,796000
 Palau,Oceania,Micronesia,460
 Palestine,Asia,Western Asia,6020
-Panama,Americas,Latin America and the Caribbean,75400
+Panama,Americas,Latin America,75400
 Papua New Guinea,Oceania,Melanesia,463000
-Paraguay,Americas,Latin America and the Caribbean,407000
-Peru,Americas,Latin America and the Caribbean,1290000
+Paraguay,Americas,Latin America,407000
+Peru,Americas,Latin America,1290000
 Philippines,Asia,South-eastern Asia,300000
 Poland,Europe,Eastern Europe,313000
 Portugal,Europe,Southern Europe,92200
@@ -161,11 +161,11 @@ South Korea,Asia,Eastern Asia,100000
 South Sudan,Africa,Sub-Saharan Africa,
 Spain,Europe,Southern Europe,506000
 Sri Lanka,Asia,Southern Asia,65600
-St. Kitts and Nevis,Americas,Latin America and the Caribbean,260
-St. Lucia,Americas,Latin America and the Caribbean,620
-St. Vincent and the Grenadines,Americas,Latin America and the Caribbean,390
+St. Kitts and Nevis,Americas,Latin America,260
+St. Lucia,Americas,Latin America,620
+St. Vincent and the Grenadines,Americas,Latin America,390
 Sudan,Africa,Northern Africa,
-Suriname,Americas,Latin America and the Caribbean,164000
+Suriname,Americas,Latin America,164000
 Sweden,Europe,Northern Europe,447000
 Switzerland,Europe,Western Europe,41300
 Syria,Asia,Western Asia,185000
@@ -175,7 +175,7 @@ Thailand,Asia,South-eastern Asia,513000
 Timor-Leste,Asia,South-eastern Asia,14900
 Togo,Africa,Sub-Saharan Africa,56800
 Tonga,Oceania,Polynesia,750
-Trinidad and Tobago,Americas,Latin America and the Caribbean,5130
+Trinidad and Tobago,Americas,Latin America,5130
 Tunisia,Africa,Northern Africa,164000
 Turkey,Asia,Western Asia,785000
 Turkmenistan,Asia,Central Asia,488000
@@ -185,10 +185,10 @@ Ukraine,Europe,Eastern Europe,604000
 United Arab Emirates,Asia,Western Asia,83600
 United Kingdom,Europe,Northern Europe,244000
 United States,Americas,Northern America,9830000
-Uruguay,Americas,Latin America and the Caribbean,176000
+Uruguay,Americas,Latin America,176000
 Uzbekistan,Asia,Central Asia,447000
 Vanuatu,Oceania,Melanesia,12200
-Venezuela,Americas,Latin America and the Caribbean,912000
+Venezuela,Americas,Latin America,912000
 Vietnam,Asia,South-eastern Asia,331000
 Yemen,Asia,Western Asia,528000
 Zambia,Africa,Sub-Saharan Africa,753000

@@ -171,7 +171,7 @@ def most_least_population(region, country_data, population_data, subregion=''):
 
 
 # Graph plotting functions
-def plot_avg_population_graph(region, subregion=False):
+def plot_avg_population_graph(region, country_data, population_data, subregion=False):
     """
     Plots the average population of a region/subregion over the years 2000-2020
     Parameters:
@@ -184,7 +184,7 @@ def plot_avg_population_graph(region, subregion=False):
     
     # Calculate average pop for each year
     for year in years:
-        avg_pop = get_avg_population(region, subregion, year)
+        avg_pop = get_avg_population(region, country_data, population_data, subregion, year)
         avg_populations.append(avg_pop)
     
     plt.figure(figsize=(10, 6))

@@ -56,7 +56,7 @@ def main(country_data, population_data, species_data):
                 
                 show_graph = input('\nWould you like to see a graph? (yes/no): ').strip().lower()
                 if show_graph == 'yes':
-                    plot_avg_population_graph(region, subregion)
+                    plot_avg_population_graph(region, country_data, population_data, subregion)
             else:
                 year = input('Enter year (2000-2020, default 2020): ').strip() or '2020'
                 avg_pop = get_avg_population(region, country_data, population_data, False, int(year))
@@ -64,7 +64,7 @@ def main(country_data, population_data, species_data):
                 
                 show_graph = input('\nWould you like to see a graph? (yes/no): ').strip().lower()
                 if show_graph == 'yes':
-                    plot_avg_population_graph(region)
+                    plot_avg_population_graph(region, country_data, population_data)
         
         # Threatened species option
         elif menu_option == '2':
